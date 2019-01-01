@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+	<select id="getTime" resultType="string">
+		select now();
+	</select>
+	
+	<insert id="insertMember">
+		INSERT INTO member
+			(USERID
+			,USERPW
+			,USERNAME
+			,EMAIL) 
+		VALUES
+			(#{userid}
+			,#{userpw}
+			,#{username}
+			,#{email})
+	</insert>
+	
+	<select id="readMember" resultType="org.kro.cmmn.MemberVO">
+		SELECT 	  
+			 USERID
+			,USERNAME
+			,EMAIL
+		    ,REGDATE
+			,UPDATEDATE
+	 	FROM member
+		WHERE USERID = #{userid}
+	</select>
+	
+	<select id="readWithPw" parameterType="hashmap" resultType="org.kro.cmmn.MemberVO">
+		SELECT 	  
+			 USERID
+			,USERNAME
+			,EMAIL
+		    ,REGDATE
+			,UPDATEDATE
+	 	FROM member
+		WHERE USERID = #{userid}
+		  AND USERPW = #{userpw} 
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+<!-- create TABLE member (
+	userid VARCHAR(50) PRIMARY KEY,
+	userpw VARCHAR(50),
+	username VARCHAR(50),
+	email VARCHAR(100),
+  regdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+  updatedate TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+); -->
