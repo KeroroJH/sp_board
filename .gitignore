@@ -1,0 +1,13 @@
+# Directories # 
+/build/ 
+/bin/ 
+target/ 
+.idea 
+classes/ 
+META-INF/ 
+
+# OS Files # 
+.DS_Store 
+
+*.class
+*.log
