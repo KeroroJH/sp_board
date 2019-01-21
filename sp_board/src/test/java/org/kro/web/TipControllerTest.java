@@ -19,9 +19,9 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:config/spring/*.xml"})
-public class MainControllerTest {
+public class TipControllerTest {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MainControllerTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(TipControllerTest.class);
 	
 	@Autowired
 	private WebApplicationContext ac;

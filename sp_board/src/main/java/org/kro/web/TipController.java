@@ -19,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class MainController {
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+public class TipController {
+	private static final Logger logger = LoggerFactory.getLogger(TipController.class);
 	
 	@RequestMapping("/doA") // void 타입은  @RequestMapping()이름과 동일하게 view로 전달되다
 	public void doAvoid(){
@@ -78,7 +78,7 @@ public class MainController {
 	@RequestMapping("/doH") // jsp에서 부터 사용된 방법 리다이렉트
 	public void doG(HttpServletResponse res) throws IOException{
 		logger.info("doH is called .. ");
-		res.sendRedirect("/doD?msg=redirect on doH jsp");
+		res.sendRedirect("/doD?msg=redirect_on_doH_jsp");
 	}
 	
 	@RequestMapping("/doJSON") // JSON 타입으로 리턴을 할때 @ResponseBody 사용 [ jackson-databind 라이브러리 의존 ]
