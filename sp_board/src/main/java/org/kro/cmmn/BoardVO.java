@@ -3,7 +3,7 @@ package org.kro.cmmn;
 import java.sql.Date;
 
 public class BoardVO {
-	private int no;
+	private int bno;
 	private int viewcnt;
 	private String title;
 	private String writer;
@@ -26,11 +26,11 @@ public class BoardVO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
-	public int getNo() {
-		return no;
+	public int getBno() {
+		return bno;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setBno(int bno) {
+		this.bno = bno;
 	}
 	public String getTitle() {
 		return title;
@@ -59,7 +59,7 @@ public class BoardVO {
 	
 	@Override
 	public String toString() {
-		return "BoardVO [no=" + no + ", viewcnt=" + viewcnt + ", title=" + title + ", writer=" + writer + ", content="
+		return "BoardVO [bno=" + bno + ", viewcnt=" + viewcnt + ", title=" + title + ", writer=" + writer + ", content="
 				+ content + ", regdate=" + regdate + "]";
 	}
 	

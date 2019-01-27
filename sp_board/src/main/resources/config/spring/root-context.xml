@@ -15,7 +15,7 @@
 		
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="url" value="jdbc:log4jdbc:mariadb://jeners.iptime.org:33307/jener"></property>
+		<property name="url" value="jdbc:log4jdbc:mysql://jeners.iptime.org:33307/jener"></property>
 		<property name="username" value="jener"></property>
 		<property name="password" value="wpsj10!"></property>
 	</bean>
@@ -31,4 +31,5 @@
 	</bean>	
 	
 	<context:component-scan base-package="org.kro.dao" />
+	<context:component-scan base-package="org.kro.service" />
 </beans>
