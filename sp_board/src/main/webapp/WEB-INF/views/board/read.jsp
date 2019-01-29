@@ -2,7 +2,23 @@
 	pageEncoding="UTF-8"%>
 
 <%@include file="../include/header.jsp"%>
+<style>
 
+.replyPageNavi li{
+  list-style: none;
+  float: left; 
+  padding: 3px; 
+  border: 1px solid blue;
+  margin:3px;  
+}
+.replyPageNavi li.active{
+  border: 1px solid red;
+}
+.reply li{
+  margin:5px;
+}
+
+</style>
 <!-- Main content -->
 <section class="content">
 	<div class="row">
@@ -48,8 +64,8 @@
 </div>
 
 
-				<script>
-				
+<script>
+
 $(document).ready(function(){
 	
 	var formObj = $("form[role='form']");
@@ -89,9 +105,6 @@ $(document).ready(function(){
 
 </script>
 
-
-
-
 			</div>
 			<!-- /.box -->
 		</div>
@@ -99,6 +112,82 @@ $(document).ready(function(){
 
 	</div>
 	<!-- /.row -->
+</section>
+
+<section class="reply">
+	<div style="margin:20px;">
+		<input type="text" name="replyer" style="width:300px;height:30px;font-size:20px; display:block;" placeholder="name">
+		<input type="text" name="replyMsg" style="width:300px;height:100px;font-size:20px;" placeholder="content">
+		<input type="button" name="replySend" value="send">
+	</div>
+	<div>
+		<ul class="ul-reply">
+			<li></li>
+		</ul>
+		<ul class='replyPageNavi'></ul>
+	</div>
+	<script>
+	$(document).ready(function(){
+		//replyLoad
+		getReplyPage(${boardVO.bno}, 1);
+		
+		//replyNavigationFunctionLoad
+		$('.replyPageNavi').on("click", "li a", function(event){
+			event.preventDefault();
+			getReplyPage(${boardVO.bno}, $(this).text());
+		});
+	});
+	
+	//replyRegist
+	$('input[name=replySend]').click(function(){
+		let replyer = $('input[name=replyer]').val();
+		let replytext = $('input[name=replyMsg]').val();
+		$.ajax({
+			type : 'POST',
+			url : '/replies/',
+			headers : {
+				'Content-Type' : 'application/json',
+				'X-HTTP-Method-Override' : 'POST'
+			},
+			dataType : 'text',
+			data : JSON.stringify({
+				bno : ${boardVO.bno},
+				replyer : replyer,
+				replytext : replytext
+			}),
+			success : function(result) {
+				if(result == 1) {
+					getReplyPage(${boardVO.bno}, 1);
+				}
+			}
+		});
+	});
+	
+	function getReplyPage(bno, page){
+		$.getJSON("/replies/"+bno+"/"+page, function(data){
+			let str = "";
+			$(data.list).each(function(){
+				str += "<li>"+ this.replyer +"//"+ this.replytext +"</li>";
+			});
+			$('.ul-reply').html(str);
+			printPaging(data.pageMaker);
+		});
+	}
+	function printPaging(pageMaker) {
+		var str = "";
+		if(pageMaker.prev){
+			str += "<li><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
+		}
+		for(var i=pageMaker.startPage, len = pageMaker.endPage; i <= len; i++){				
+				var strClass= pageMaker.pageinfo.page == i?'class=active':'';
+			  str += "<li "+strClass+"><a href='"+i+"'>"+i+"</a></li>";
+		}
+		if(pageMaker.next){
+			str += "<li><a href='"+(pageMaker.endPage + 1)+"'> >> </a></li>";
+		}
+		$('.replyPageNavi').html(str);	
+	}
+	</script>
 </section>
 <!-- /.content -->
 </div>
