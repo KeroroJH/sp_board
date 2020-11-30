@@ -19,7 +19,7 @@ public class DataSourceTest {
 	private DataSource ds;
 
 	@Test
-	public void test() {
+	public void TEST() {
 		try {
 			Connection conn = ds.getConnection();
 		} catch (SQLException e) {

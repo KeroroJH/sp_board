@@ -44,9 +44,9 @@ public class BoardDAOTest {
 	}
 	
 	@Test
-	public void readTest(){
+	public void teadTest(){
 		Map map = new HashMap<String, String>();
-			map.put("bno", "4");
+			map.put("bno", "13");
 		BoardVO vo = dao.read(map);
 		System.out.println(vo.toString());
 	}
